@@ -1,0 +1,11 @@
+1. et 2. 
+
+Toutes les informations sur les constantes flags et mode_t on été obtenus par le biais du fichier man 2 open 
+
+3. 
+
+Dans notre cas, le programme s'arrête du à la fonction error_chk, sans cette fonction nous recevons un code erreur 255 
+
+4. 
+
+Après test, le code ce termine sans erreur, la copie s'effectue, mais le fichier dans le quelle nous coppions est créer sans aucune permission
