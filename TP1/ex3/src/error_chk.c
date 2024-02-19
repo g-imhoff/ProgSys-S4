@@ -2,18 +2,18 @@
 #include "error_chk.h"
 
 void error_chk(int error_code) {
-    if(error_code < 0) {
-        switch(error_code) {
-            case EPERM: 
+    if (error_code < 0) {
+        switch (error_code) {
+            case EPERM:
                 printf("Operation not permitted\n");
-                break; 
-            case ENOENT: 
+                break;
+            case ENOENT:
                 printf("No such file or directory\n");
-                break; 
-            case ESRCH: 
-                printf("No such process\n"); 
-                break; 
+                break;
+            case ESRCH:
+                printf("No such process\n");
+                break;
         }
-    exit(error_code);
+        exit(error_code);
     }
 }
