@@ -37,7 +37,10 @@ void cp_sys(const char* pathname1, const char* pathname2) {
     ssize_t nbr_bytes_read = read(file1, buffer, sizeof(buffer)); 
     error_chk(nbr_bytes_read);
     buffer[nbr_bytes_read] = '\0'; 
+    close(file1);
 
     ssize_t nbr_bytes_write = write(file2, buffer, nbr_bytes_read); 
     error_chk(nbr_bytes_write);
+    close(file2);
+    
 }
