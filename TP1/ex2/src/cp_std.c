@@ -8,7 +8,7 @@ void cp_std(const char* file1, const char* file2) {
     FILE* f2 = fopen(file2, "w"); 
     error_chk_file(f2); 
 
-    char buffer[1024];
+    char buffer[50000];
     size_t nbr_bytes_read = fread(buffer, 1, sizeof(buffer), f1); 
     error_chk(nbr_bytes_read); 
     buffer[nbr_bytes_read] = '\0';  
