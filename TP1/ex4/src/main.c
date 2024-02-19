@@ -6,8 +6,8 @@ int main(int argc, char** argv) {
         printf("Ce programme nécessite 4 arguments mais a reçu : %d\n", argc);
         exit(EXIT_FAILURE);
     }
-    
-    cp_rev(argv[1], argv[2]); 
-    
+
+    cp_rev(argv[1], argv[2]);
+
     return EXIT_SUCCESS;
 }
