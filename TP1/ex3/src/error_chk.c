@@ -17,3 +17,10 @@ void error_chk(int error_code) {
         exit(error_code);
     }
 }
+
+void error_chk_file(FILE* file) {
+    if (file == NULL) {
+        perror("Error opening input file");
+        exit(EXIT_FAILURE);
+    }
+}

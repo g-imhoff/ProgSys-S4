@@ -13,5 +13,6 @@
  */
 
 void error_chk(int error_code);
+void error_chk_file(FILE* file);
 
 #endif
