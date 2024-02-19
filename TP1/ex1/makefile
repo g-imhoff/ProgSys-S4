@@ -2,7 +2,7 @@
 CC = gcc
 HEADER_POS = -Iheader
 CFLAGS = -Wall -Wextra -Werror -pedantic
-EXEC = main
+EXEC = cp_sys
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 DEPS = $(wildcard header/*.h)
@@ -19,7 +19,7 @@ obj/%.o: src/%.c $(DEPS)
 
 #Supprimer les dossiers obj, doc et supprimer main.exe
 clean:
-	rm -f $(EXEC)
+	rm -f $(EXEC) copy*
 	rm -rf obj
 
 sanitizers: 
