@@ -1,1 +1,2 @@
 1. J'ai trouver ces information dans man fopen
+2. Il le créer avec comme permission 0666
