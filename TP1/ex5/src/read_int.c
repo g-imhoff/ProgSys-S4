@@ -2,19 +2,16 @@
 #include "error_chk.h"
 
 void read_int(const char* filepath, int pos) {
-    int file1 = open(filepath, O_RDONLY);
-    error_chk(file1);
-    off_t nb_bytes = lseek(file1, pos, SEEK_CUR); 
-    error_chk((int) nb_bytes);
+    int fd = open(filepath, O_RDONLY);
+    error_chk(fd);
+    int offset = lseek(fd, pos, SEEK_SET);
+    error_chk(offset);
 
-    char* c = (char*) malloc(sizeof(char)); 
-    malloc_error(c);
-    ssize_t size_read = read(file1, c, 1); 
-    error_chk(size_read);
+    uint64_t num;
+    int ret = read(fd, &num, sizeof(uint64_t));
+    error_chk(ret);
+    printf("%" PRIu64 "\n", num);
 
-    int64_t val = (int64_t) c; 
-
-    printf("val = %"PRId64"\n", val);                                               
-
-    free(c);
+    close(fd);
 }
+

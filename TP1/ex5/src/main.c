@@ -8,7 +8,7 @@ int main(int argc, char** argv) {
     }
 
     int pos = atoi(argv[2]);
-    read_int(argv[1], pos); 
+    read_int(argv[1], pos);
 
     return EXIT_SUCCESS;
 }
