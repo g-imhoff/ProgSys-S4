@@ -18,4 +18,6 @@ void cp_rev(const char* filepath1, const char* filepath2) {
     } while (lseek(file1, -2, SEEK_CUR) != -1);
 
     free(c);
+    close(file1);
+    close(file2);
 }
