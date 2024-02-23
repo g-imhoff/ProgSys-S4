@@ -35,7 +35,7 @@ void cp_sys(const char* pathname1, const char* pathname2) {
 
     char buffer;
 
-    while (read(file1, &buffer, sizeof(char)) != EOF) {
+    while (read(file1, &buffer, sizeof(char)) >= 1) {
         ssize_t nbr_bytes_write = write(file2, &buffer, 1); 
         error_chk(nbr_bytes_write);
     }
