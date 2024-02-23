@@ -10,7 +10,6 @@ void cp_std(const char* file1, const char* file2) {
 
     char buffer;
     while (fread(&buffer, sizeof(char), 1, f1) >= 1) {        
-        printf("%c", buffer);
         size_t nbr_bytes_write = fwrite(&buffer, sizeof(char), 1, f2); 
         error_chk(nbr_bytes_write);
     }
