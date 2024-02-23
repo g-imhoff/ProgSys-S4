@@ -1,8 +1,8 @@
 #include "base.h"
-#include "ls1.h"
+#include "ls.h"
 
 int main() {
-    ls1();
+    ls2();
 
     return EXIT_SUCCESS;
 }

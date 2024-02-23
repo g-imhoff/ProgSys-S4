@@ -2,7 +2,7 @@
 CC = gcc
 HEADER_POS = -Iheader
 CFLAGS = -Wall -Wextra -Werror -pedantic
-EXEC = ls1
+EXEC = ls2
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 DEPS = $(wildcard header/*.h)
