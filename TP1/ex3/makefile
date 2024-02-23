@@ -19,7 +19,7 @@ obj/%.o: src/%.c $(DEPS)
 
 #Supprimer les dossiers obj, doc et supprimer main.exe
 clean:
-	rm -f $(EXEC) copy 
+	rm -f $(EXEC) copy*
 	rm -rf obj
 
 sanitizers: 

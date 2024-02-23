@@ -10,12 +10,16 @@ void cp_sys(const char* pathname1, const char* pathname2, int taille_buffer) {
     error_chk(file2);
 
     char* buffer = (char*)malloc(taille_buffer * sizeof(char));
-    ssize_t nbr_bytes_read = read(file1, buffer, taille_buffer * sizeof(char));
-    error_chk(nbr_bytes_read);
-    buffer[nbr_bytes_read] = '\0';
-    close(file1);
 
-    ssize_t nbr_bytes_write = write(file2, buffer, nbr_bytes_read);
-    error_chk(nbr_bytes_write);
+    ssize_t nbr_bytes_read = 100;
+    while (nbr_bytes_read >= 1) {
+        nbr_bytes_read = read(file1, buffer, taille_buffer);
+        error_chk(nbr_bytes_read);
+        ssize_t nbr_bytes_write = write(file2, buffer, nbr_bytes_read);
+        error_chk(nbr_bytes_write);
+    }
+
+    free(buffer);
+    close(file1);
     close(file2);
 }

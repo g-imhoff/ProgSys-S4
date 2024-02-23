@@ -24,3 +24,10 @@ void error_chk_file(FILE* file) {
         exit(EXIT_FAILURE);
     }
 }
+
+void malloc_error(void* item) {
+    if (item == NULL) {
+        perror("Malloc failled");
+        exit(EXIT_FAILURE); 
+    }
+}
