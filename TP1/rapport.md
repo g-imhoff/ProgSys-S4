@@ -34,3 +34,13 @@ temps cp_sys :
 
 4096 89ms
 
+## Exercice 4 
+1. Pour positionner a la toute fin du fichier lseek(nom_du_fichier, 0, SEEK_END);
+
+2. Pour faire reculer la tête de lecture lseek(nom_du_fichier, -1, SEEK_CUR); 
+
+3. Dans mon code j'ai utiliser cette ligne de code  off_t file_size = lseek(file1, -1, SEEK_END);
+
+file_size va contenir la taille en octet du fichier
+
+On peux aussi parcourir tout le fichier et en determiner le nombre d'octet ? 
