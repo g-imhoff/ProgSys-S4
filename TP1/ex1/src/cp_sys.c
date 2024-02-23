@@ -33,14 +33,14 @@ void cp_sys(const char* pathname1, const char* pathname2) {
     int file2 = open(pathname2 , O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
     error_chk(file2); 
 
-    char buffer[50000];
-    ssize_t nbr_bytes_read = read(file1, buffer, sizeof(buffer)); 
-    error_chk(nbr_bytes_read);
-    buffer[nbr_bytes_read] = '\0'; 
-    close(file1);
+    char buffer;
 
-    ssize_t nbr_bytes_write = write(file2, buffer, nbr_bytes_read); 
-    error_chk(nbr_bytes_write);
+    while (read(file1, &buffer, sizeof(char)) != EOF) {
+        ssize_t nbr_bytes_write = write(file2, &buffer, 1); 
+        error_chk(nbr_bytes_write);
+    }
+
+    close(file1);
     close(file2);
     
 }

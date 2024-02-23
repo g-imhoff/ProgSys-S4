@@ -1,3 +1,0 @@
-1. J'ai trouver ces information dans man fopen
-2. Il le créer avec comme permission 0666
-3. EOF correspond au caractère mis à la fin d'un fichier, elle est donc présent à la fin d'un fichier 
