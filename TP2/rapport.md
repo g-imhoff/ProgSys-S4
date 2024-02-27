@@ -18,12 +18,19 @@ et donc en fonction des permission nous aurons un nombre entre 0 et 7 exemple :
 
 2. Voici les différente constantes permettant d'accéder au différent bits 
 
-mode & S_IRUSR vérifie que ce bits existe 100 000 000
-mode & S_IWUSR vérifie que ce bits existe 010 000 000
-mode & S_IXUSR vérifie que ce bits existe 001 000 000
-mode & S_IRGRP vérifie que ce bits existe 000 100 000
-mode & S_IWGRP vérifie que ce bits existe 000 010 000
-mode & S_IXGRP vérifie que ce bits existe 000 001 000
-mode & S_IROTH vérifie que ce bits existe 000 000 100
-mode & S_IWOTH vérifie que ce bits existe 000 000 010
-mode & S_IXOTH vérifie que ce bits existe 000 000 001
+mode & S_IRUSR vérifie que ce bits existe 100 000 000  
+mode & S_IWUSR vérifie que ce bits existe 010 000 000  
+mode & S_IXUSR vérifie que ce bits existe 001 000 000  
+mode & S_IRGRP vérifie que ce bits existe 000 100 000  
+mode & S_IWGRP vérifie que ce bits existe 000 010 000  
+mode & S_IXGRP vérifie que ce bits existe 000 001 000  
+mode & S_IROTH vérifie que ce bits existe 000 000 100  
+mode & S_IWOTH vérifie que ce bits existe 000 000 010  
+mode & S_IXOTH vérifie que ce bits existe 000 000 001  
+
+## Exercice 3 
+
+1. Pour gérer l'aspect récursif de l'affichage des fichiers dans les sous-répertoires il y deux cas, sois c'est une fichier et donc on affiche le chemin entier, si c'est un dossier on affiche le chemin, puis on fait un appel récursif avec le chemin comme arguments.
+2. La taille du buffer doit être égale à PATH_MAX pour être sur que nous aurons un espace suffisant pour stocker le chemin du fichier/dossier.
+3. On peux détécter les erreur en verifiant que ce que renvoie readdir est différent de null.
+4. Dans mon cas, j'ai créer une fonction ifnull, qui vérifie si ce que renvoie readdir est différent de null, si c'est égale à nul ça affiche un message d'erreur et arrete le programme.
