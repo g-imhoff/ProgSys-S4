@@ -1,17 +1,16 @@
 #include "base.h"
 #include "error_chk.h"
 
-void read_int(const char* filepath, int pos) {
-    int fd = open(filepath, O_RDONLY);
-    error_chk(fd);
-    int offset = lseek(fd, pos, SEEK_SET);
-    error_chk(offset);
+void read_int(const char* filename, int pos) {
+    int file = open(filename, O_RDONLY);
+    error_chk(file);
 
-    uint64_t num;
-    int ret = read(fd, &num, sizeof(uint64_t));
-    error_chk(ret);
-    printf("%" PRIu64 "\n", num);
+    int error = lseek(file, pos-1, SEEK_SET);
+    error_chk(error);
 
-    close(fd);
+    int64_t value;
+    int read_error = read(file, &value, sizeof(int64_t));
+    error_chk(read_error);
+    printf("value : %ld\n", value);
+    close(file);
 }
-
