@@ -34,3 +34,7 @@ mode & S_IXOTH vérifie que ce bits existe 000 000 001
 2. La taille du buffer doit être égale à PATH_MAX pour être sur que nous aurons un espace suffisant pour stocker le chemin du fichier/dossier.
 3. On peux détécter les erreur en verifiant que ce que renvoie readdir est différent de null.
 4. Dans mon cas, j'ai créer une fonction ifnull, qui vérifie si ce que renvoie readdir est différent de null, si c'est égale à nul ça affiche un message d'erreur et arrete le programme.
+
+## Exercice 4 
+
+1. Pour rechercher une chaine au sein du fichier, je vais lire le fichier 1 par 1, si à un moment donner, l'élément lu est égal au ieme élément dans chaine_find on incrémente i de 1, si il est différent on remet i = 0 et si i est égal a la longueur de chaine_find on arrete la boucle et on renvoie vrai, cela nous permet donc d'avoir un boolean qui nous dis si la chaine de caractère est contenu dans le fichier ou non 

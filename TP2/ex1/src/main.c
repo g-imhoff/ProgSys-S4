@@ -7,7 +7,7 @@ int main(int argc, char** argv) {
         exit(EXIT_FAILURE);
     }
 
-    my_stat(argv[1]); 
+    my_stat(argv[1]);
 
     return EXIT_SUCCESS;
 }

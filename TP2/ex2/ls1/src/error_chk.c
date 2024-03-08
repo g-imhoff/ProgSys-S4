@@ -32,7 +32,6 @@ void malloc_chk(void* item) {
     }
 }
 
-
 void ifnull(void* item) {
     if (item == NULL) {
         perror("Malloc failled");

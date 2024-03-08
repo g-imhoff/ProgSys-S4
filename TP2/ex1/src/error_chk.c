@@ -28,6 +28,6 @@ void error_chk_file(FILE* file) {
 void malloc_chk(void* item) {
     if (item == NULL) {
         perror("Malloc failled");
-        exit(EXIT_FAILURE); 
+        exit(EXIT_FAILURE);
     }
 }

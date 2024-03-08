@@ -1,22 +1,10 @@
 #include "base.h"
 #include "error_chk.h"
-#include "ls.h"
-
-void ls1(void) {
-    DIR* dir = opendir(".");
-    ifnull(dir);
-    struct dirent* item;
-    while ((item = readdir(dir))) {
-        ifnull(item); 
-        if (item->d_name[0] != '.') {
-            printf("%s\n", item->d_name);
-        }
-    }
-}
+#include "ls2.h"
 
 char* permString(mode_t mode) {
-    char* perms = (char*) malloc(11 * sizeof(char));
-    perms[0] = (S_ISDIR(mode)) ? 'd' : '-'; 
+    char* perms = (char*)malloc(11 * sizeof(char));
+    perms[0] = (S_ISDIR(mode)) ? 'd' : '-';
     perms[1] = (mode & S_IRUSR) ? 'r' : '-';
     perms[2] = (mode & S_IWUSR) ? 'w' : '-';
     perms[3] = (mode & S_IXUSR) ? 'x' : '-';
@@ -35,12 +23,12 @@ void ls2(void) {
     ifnull(dir);
     struct dirent* item;
     while ((item = readdir(dir))) {
-        ifnull(item); 
+        ifnull(item);
 
         if (item->d_name[0] != '.') {
-            struct stat *st = (struct stat*) malloc(sizeof(struct stat)); 
+            struct stat* st = (struct stat*)malloc(sizeof(struct stat));
             int chk = stat(item->d_name, st);
-            error_chk(chk); 
+            error_chk(chk);
 
             char* perms = permString(st->st_mode);
             printf("%s %s\n", perms, item->d_name);

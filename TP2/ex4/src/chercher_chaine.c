@@ -3,24 +3,24 @@
 #include "chercher_chaine.h"
 
 bool recherche_fichier(const char* chaine_find, const char* filepath) {
-    bool validite = false; 
-    
+    bool validite = false;
+
     int file1 = open(filepath, O_RDONLY);
     error_chk(file1);
 
     char* buffer = (char*)malloc(sizeof(char));
     int i = 0;
-    int len_chaine_find = strlen(chaine_find); 
+    int len_chaine_find = strlen(chaine_find);
     while (read(file1, buffer, 1) == 1 && !validite) {
-        if(*buffer == chaine_find[i]) {
+        if (*buffer == chaine_find[i]) {
             i++;
         } else {
-            i = 0; 
+            i = 0;
         }
 
         if (i == len_chaine_find) {
-            validite = true; 
-        } 
+            validite = true;
+        }
     }
 
     return validite;
@@ -49,8 +49,8 @@ void chercher_chaine(const char* chaine_find, const char* folder_path) {
             if (S_ISDIR(st->st_mode)) {
                 chercher_chaine(chaine_find, full_path);
             } else {
-                if(recherche_fichier(chaine_find, full_path)) {
-                    printf("%s\n", full_path); 
+                if (recherche_fichier(chaine_find, full_path)) {
+                    printf("%s\n", full_path);
                 }
             }
         }
