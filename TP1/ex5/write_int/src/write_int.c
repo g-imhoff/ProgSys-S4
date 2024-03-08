@@ -14,10 +14,10 @@ void write_int(const char* filename, int pos, int64_t value) {
     if (read(file, &c, 1) == 0) {
         int test = lseek(file, 0, SEEK_END);
         error_chk(test);
-        int i = test; 
-        while (i != pos -1) {
+        int i = test;
+        while (i != pos - 1) {
             write(file, &zero, 1);
-            i++; 
+            i++;
         }
     }
 

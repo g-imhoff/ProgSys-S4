@@ -5,7 +5,7 @@ void read_int(const char* filename, int pos) {
     int file = open(filename, O_RDONLY);
     error_chk(file);
 
-    int error = lseek(file, pos-1, SEEK_SET);
+    int error = lseek(file, pos - 1, SEEK_SET);
     error_chk(error);
 
     int64_t value;

@@ -44,3 +44,12 @@ temps cp_sys :
 file_size va contenir la taille en octet du fichier
 
 On peux aussi parcourir tout le fichier et en determiner le nombre d'octet ? 
+
+## Exercice 5 
+1. Le programme renvoie une erreur 255
+
+2. Le programme renvoie des nombres au hasard
+
+3. Sachant que lseek(file, 0, SEEK_END) renvoie la longueur du fichier, on pourrais faire un test verifiant que la position n'est pas supérieur à cette fonction 
+
+4. Comme demander dans l'énoncer il ajoute des 0 jusqu'a la position
