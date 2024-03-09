@@ -23,6 +23,8 @@ bool recherche_fichier(const char* chaine_find, const char* filepath) {
         }
     }
 
+    close(file1);
+    free(buffer);
     return validite;
 }
 
@@ -53,6 +55,8 @@ void chercher_chaine(const char* chaine_find, const char* folder_path) {
                     printf("%s\n", full_path);
                 }
             }
+            free(st);
         }
     }
+    closedir(dir);
 }

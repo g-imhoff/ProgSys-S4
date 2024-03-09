@@ -12,4 +12,5 @@ void ls1(void) {
             printf("%s\n", item->d_name);
         }
     }
+    closedir(dir);
 }

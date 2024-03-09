@@ -32,6 +32,8 @@ void ls2(void) {
 
             char* perms = permString(st->st_mode);
             printf("%s %s\n", perms, item->d_name);
+            free(st);
+            free(perms);
         }
     }
     closedir(dir);

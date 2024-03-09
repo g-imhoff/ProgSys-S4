@@ -20,3 +20,10 @@ format :
 	$(MAKE) -C ex2/ls2 format
 	$(MAKE) -C ex3 format
 	$(MAKE) -C ex4 format
+
+sanitizers : 
+	$(MAKE) -C ex1 sanitizers
+	$(MAKE) -C ex2/ls1 sanitizers
+	$(MAKE) -C ex2/ls2 sanitizers
+	$(MAKE) -C ex3 sanitizers
+	$(MAKE) -C ex4 sanitizers

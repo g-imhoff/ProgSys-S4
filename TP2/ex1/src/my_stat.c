@@ -17,4 +17,5 @@ void my_stat(const char* pathfile) {
     }
 
     printf("Mode : %o\n", s->st_mode & 0777);
+    free(s);
 }

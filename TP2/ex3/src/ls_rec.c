@@ -27,6 +27,7 @@ void ls_rec(const char* pathfolder) {
             } else {
                 printf("%s\n", full_path);
             }
+            free(st);
         }
     }
 
