@@ -25,6 +25,6 @@ test: $(EXEC_FILE)
 
 clean:
 	rm -f $(EXEC_FILE) *.o
-	rm -f *.aux *.log *.out *.pdf
+	rm -f *.aux *.log *.out
 	rm -f moodle.tgz
 
