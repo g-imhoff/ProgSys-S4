@@ -19,3 +19,6 @@ EPERM  A  "capability-dumb"  applications would not obtain the full set
 of permitted capabilities granted by the executable  file.   See
 capabilities(7).
 
+## Exercice 4 
+1. 1. Non il n'est pas bien former, le texte n'est plus du tout lisible, on peux imaginer que le deux processus sont rentrer en conflit et écrivais en même temps ce qui a fait que le texte n'avais plus aucun sens 2. il contient le double de charactère lus par un processus, ce qui peux être explique du au fait qu'on lit deux fois le fichier avec les deux processus
+2. un des deux processus de lis pas le fichier, on peux supposer que c'est le processus enfant 
