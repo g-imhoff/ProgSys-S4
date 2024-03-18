@@ -6,8 +6,7 @@ int run(const char* cmd, char* const arg[]) {
 
     if (child_pid == 0) {
         int return_code = execvp(cmd, arg);
-        
-        
+
         if (return_code < 0) {
             perror("Error: Pas une commande valide");
             return 2;

@@ -14,6 +14,7 @@ void fork2(int n) {
 
     for (int i = 0; i < n; i++) {
         pid_t return_pid = waitpid(tab_pid[i], NULL, 0);
-        printf("Le processus %d est terminé et a renvoyer %d\n", tab_pid[i], return_pid);
+        printf("Le processus %d est terminé et a renvoyer %d\n", tab_pid[i],
+               return_pid);
     }
 }

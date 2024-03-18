@@ -4,6 +4,6 @@
 int main() {
     int result = fork1();
     printf("Result: %d\n", result);
-    
+
     return EXIT_SUCCESS;
 }

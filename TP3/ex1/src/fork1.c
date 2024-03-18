@@ -8,7 +8,8 @@ int fork1(void) {
         pid_t parent_pid = getppid();
 
         printf("i'm the child\n");
-        printf("Actual process pid: %d\nParent process pid %d\n", actual_pid, parent_pid);
+        printf("Actual process pid: %d\nParent process pid %d\n", actual_pid,
+               parent_pid);
 
         int last_digit = actual_pid % 10;
         return last_digit;
@@ -16,8 +17,9 @@ int fork1(void) {
         pid_t ending_child_pid = waitpid(child_pid, NULL, 0);
 
         printf("i'm the parent\n");
-        printf("Actual process pid %d\nChild process pid %d\n", actual_pid, child_pid);
+        printf("Actual process pid %d\nChild process pid %d\n", actual_pid,
+               child_pid);
 
-        return ending_child_pid; 
+        return ending_child_pid;
     }
 }
