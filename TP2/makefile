@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: all 
 
 all:
 	$(MAKE) -C ex1
@@ -6,6 +6,8 @@ all:
 	$(MAKE) -C ex2/ls2
 	$(MAKE) -C ex3
 	$(MAKE) -C ex4
+
+.phony: clean format sanitizers
 
 clean:
 	$(MAKE) -C ex1 clean

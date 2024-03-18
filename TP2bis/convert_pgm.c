@@ -8,12 +8,12 @@
 
 bool magic_number_is_P5(char magic_number[3]) {
     bool validite = magic_number[0] == 'P' && magic_number[1] == '5';
-
-    return  validite;
+    validite = validite && (magic_number[2] == '\n' || magic_number[2] == ' ' || magic_number[2] == '\t');
+    return validite;
 }
 
 int convert_pgm(const char* filein, const char* fileout) {
-    printf("%s\n", fileout); 
+    printf("%s %s\n", filein, fileout); 
     int file = open(filein, O_RDONLY);
     if (file == -1) {
         perror("open");
@@ -21,6 +21,7 @@ int convert_pgm(const char* filein, const char* fileout) {
     }
 
     char magic_number[3];
+
     if (read(file, &magic_number, 3) != 3) {
         perror("read");
         return 1; // error on system call

@@ -1,23 +1,19 @@
-CC = gcc
-HEADER_POS = -Iheader
-CFLAGS = -Wall -Wextra -Werror -pedantic
-EXEC = main
-SRC = $(wildcard src/*.c)
-OBJ = $(SRC:src/%.c=obj/%.o)
-DEPS = $(wildcard header/*.h)
+.PHONY: all 
 
-$(EXEC): $(OBJ)
-	$(CC) $(CFLAGS) $(HEADER_POS) -o $@ $^
+all:
+	$(MAKE) -C ex1
+	$(MAKE) -C ex2
 
-obj/%.o: src/%.c $(DEPS)
-	mkdir -p obj
-	$(CC) $(CFLAGS) $(HEADER_POS) -o $@ -c $<
+.phony: clean format sanitizers
 
 clean:
-	rm -f $(EXEC)
-	rm -rf obj
+	$(MAKE) -C ex1 clean
+	$(MAKE) -C ex2 clean
+	
+format : 
+	$(MAKE) -C ex1 format
+	$(MAKE) -C ex2 format
 
-format:
-	@for file in $(SRC) $(DEPS); do \
-		clang-format -i $$file; \
-	done
+sanitizers : 
+	$(MAKE) -C ex1 sanitizers
+	$(MAKE) -C ex2 sanitizers

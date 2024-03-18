@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "run.h": "c",
+        "base.h": "c"
+    }
+}
