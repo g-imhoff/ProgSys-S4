@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "base.h": "c",
+        "fcntl.h": "c",
+        "wait.h": "c",
+        "unistd.h": "c",
+        "error_chk.h": "c"
+    }
+}
