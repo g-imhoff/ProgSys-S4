@@ -13,6 +13,9 @@ void error_chk(int error_code) {
             case ESRCH:
                 perror("No such process\n");
                 break;
+            default:
+                perror("Error");
+                break;
         }
         exit(error_code);
     }
