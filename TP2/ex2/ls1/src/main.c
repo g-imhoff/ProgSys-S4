@@ -2,7 +2,7 @@
 #include "ls1.h"
 
 int main() {
-    ls1();
+  ls1();
 
-    return EXIT_SUCCESS;
+  return EXIT_SUCCESS;
 }

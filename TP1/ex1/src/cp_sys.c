@@ -12,37 +12,26 @@
  * which error it is
  */
 
-void error_chk(int error_code) {
-  if (error_code < 0) {
-    switch (error_code) {
-    case EPERM:
-      printf("Operation not permitted\n");
-      break;
-    case ENOENT:
-      printf("No such file or directory\n");
-      break;
-    case ESRCH:
-      printf("No such process\n");
-      break;
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
     }
-    exit(error_code);
-  }
 }
 
-void cp_sys(const char *pathname1, const char *pathname2) {
-  int file1 = open(pathname1, O_RDONLY);
-  error_chk(file1);
-  int file2 = open(pathname2, O_WRONLY | O_CREAT,
-                   S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
-  error_chk(file2);
+void cp_sys(const char* pathname1, const char* pathname2) {
+    int file1 = open(pathname1, O_RDONLY);
+    raler("Ne peux pas ouvrir le fichier1", file1);
+    int file2 = open(pathname2, O_WRONLY | O_CREAT,
+                     S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH);
+    raler("Ne peux pas ouvrir le fichier2", file2);
+    char buffer;
 
-  char buffer;
+    while (read(file1, &buffer, sizeof(char)) >= 1) {
+        ssize_t nbr_bytes_write = write(file2, &buffer, 1);
+        raler("erreur d'écriture", nbr_bytes_write);
+    }
 
-  while (read(file1, &buffer, sizeof(char)) >= 1) {
-    ssize_t nbr_bytes_write = write(file2, &buffer, 1);
-    error_chk(nbr_bytes_write);
-  }
-
-  close(file1);
-  close(file2);
+    close(file1);
+    close(file2);
 }
