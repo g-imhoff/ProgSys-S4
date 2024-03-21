@@ -1,5 +1,5 @@
-#include "error_chk.h"
 #include "base.h"
+#include "error_chk.h"
 
 void error_chk_file(FILE* file) {
     if (file == NULL) {

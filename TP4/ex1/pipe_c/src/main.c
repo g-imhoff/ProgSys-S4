@@ -1,6 +1,8 @@
 #include "../header/base.h"
+#include "../header/pipe_c.h"
 
 int main() {
-    
-    return EXIT_SUCCESS;
+    int value = pipe_c();
+
+    return value;
 }

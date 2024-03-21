@@ -39,7 +39,8 @@ void lecture_pipe(void) {
     raler("Ne peux pas créer le pipe", creating_pipe);
     char* buffer = (char*)malloc(BUFFER_SIZE * sizeof(char));
     raler_malloc((void*)buffer);
-    read(tube[0], buffer, sizeof(buffer));
+    ssize_t reading_size = read(tube[0], buffer, sizeof(buffer));
+    raler("Erreur de lecture", reading_size);
 
     printf("%s\n", buffer);
 }
