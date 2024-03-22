@@ -1,25 +1,38 @@
 #include "base.h"
-#include "error_chk.h"
 #include "ls_rec.h"
+
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
+    }
+}
+
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
 void ls_rec(const char* pathfolder) {
     DIR* dir = opendir(pathfolder);
-    ifnull(dir);
+    raler_null("Erreur lors de l'ouverture du dossier", (void*)dir);
     struct dirent* item;
     while ((item = readdir(dir))) {
-        ifnull(item);
+        raler_null("Erreur lors du readdir", (void*)item);
 
         if (item->d_name[0] != '.') {
             struct stat* st = (struct stat*)malloc(sizeof(struct stat));
-            malloc_chk(st);
+            raler_null("Erreur lors du malloc pour stat", (void*)st);
 
             char full_path[PATH_MAX];
             int fullpath_chk = snprintf(full_path, sizeof(full_path), "%s/%s",
                                         pathfolder, item->d_name);
-            error_chk(fullpath_chk);
+            raler("Erreur lors de la création de full_path", fullpath_chk);
 
             int stat_chk = stat(full_path, st);
-            error_chk(stat_chk);
+            raler("Erreur lors du stat", stat_chk);
 
             if (S_ISDIR(st->st_mode)) {
                 printf("%s\n", full_path);
@@ -31,5 +44,6 @@ void ls_rec(const char* pathfolder) {
         }
     }
 
-    closedir(dir);
+    int closing_directory = closedir(dir);
+    raler("Erreur lors de la fermeture du dossier", closing_directory);
 }

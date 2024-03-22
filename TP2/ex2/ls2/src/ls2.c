@@ -1,9 +1,23 @@
 #include "base.h"
-#include "error_chk.h"
 #include "ls2.h"
+
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
+    }
+}
+
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
 char* permString(mode_t mode) {
     char* perms = (char*)malloc(11 * sizeof(char));
+    raler_null("Erreur lors du malloc pour les permissions", (void*)perms);
     perms[0] = (S_ISDIR(mode)) ? 'd' : '-';
     perms[1] = (mode & S_IRUSR) ? 'r' : '-';
     perms[2] = (mode & S_IWUSR) ? 'w' : '-';
@@ -20,15 +34,16 @@ char* permString(mode_t mode) {
 
 void ls2(void) {
     DIR* dir = opendir(".");
-    ifnull(dir);
+    raler_null("Erreur lors de l'ouverture du dossier", (void*)dir);
     struct dirent* item;
     while ((item = readdir(dir))) {
-        ifnull(item);
+        raler_null("Erreur lors du readdir", (void*)item);
 
         if (item->d_name[0] != '.') {
             struct stat* st = (struct stat*)malloc(sizeof(struct stat));
+            raler_null("Erreur lors du malloc pour stat", (void*)st);
             int chk = stat(item->d_name, st);
-            error_chk(chk);
+            raler("Erreur lors du stat", chk);
 
             char* perms = permString(st->st_mode);
             printf("%s %s\n", perms, item->d_name);
@@ -36,5 +51,6 @@ void ls2(void) {
             free(perms);
         }
     }
-    closedir(dir);
+    int closing_directory = closedir(dir);
+    raler("Erreur lors de la fermeture du dossier", closing_directory);
 }

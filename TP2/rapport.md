@@ -14,7 +14,7 @@ et donc en fonction des permission nous aurons un nombre entre 0 et 7 exemple :
 
 ## Exercice 2 
 
-1. 
+1. on pourrait peux être utiliser strcmp
 
 2. Voici les différente constantes permettant d'accéder au différent bits 
 

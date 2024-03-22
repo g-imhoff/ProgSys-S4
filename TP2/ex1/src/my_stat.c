@@ -1,12 +1,26 @@
 #include "base.h"
-#include "error_chk.h"
 #include "my_stat.h"
+
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
+    }
+}
+
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
 void my_stat(const char* pathfile) {
     struct stat* s = (struct stat*)malloc(sizeof(struct stat));
-    malloc_chk(s);
-    int chk = stat(pathfile, s);
-    error_chk(chk);
+    raler_null("Erreur du malloc stat", (void*)s);
+
+    int chk_stat = stat(pathfile, s);
+    raler("Erreur du stat", chk_stat);
 
     printf("UID : %d\nGID : %d\nFile size : %ld\n", s->st_uid, s->st_gid,
            s->st_size);
