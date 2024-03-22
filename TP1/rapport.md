@@ -34,6 +34,8 @@ temps cp_sys :
 
 4096 89ms
 
+2. le buffer est de taille 8192octets
+
 ## Exercice 4 
 1. Pour positionner a la toute fin du fichier lseek(nom_du_fichier, 0, SEEK_END);
 

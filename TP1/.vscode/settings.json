@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "cp_sys.h": "c",
+        "raler.C": "cpp",
+        "cp_std.h": "c",
+        "cp_rev.h": "c"
     }
 }

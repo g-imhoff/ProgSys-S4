@@ -1,17 +1,19 @@
 #include "base.h"
-#include "error_chk.h"
 #include "cp_std.h"
+#include "raler.h"
 
 void cp_std(const char* file1, const char* file2) {
     FILE* f1 = fopen(file1, "r");
-    error_chk_file(f1);
+    raler_null("n'as pas reussi à ouvrir le fichier1", (void*)f1);
     FILE* f2 = fopen(file2, "w");
-    error_chk_file(f2);
+    raler_null("n'as pas reussi à ouvrir le fichier2", (void*)f2);
 
     char buffer;
-    while (fread(&buffer, sizeof(char), 1, f1) >= 1) {
+    size_t nbr_bytes_read;
+    while ((nbr_bytes_read = fread(&buffer, sizeof(char), 1, f1)) >= 1) {
+        raler("N'as pas reussi à lire", (int)nbr_bytes_read);
         size_t nbr_bytes_write = fwrite(&buffer, sizeof(char), 1, f2);
-        error_chk(nbr_bytes_write);
+        raler("N'as pas reussi à écrire", (int)nbr_bytes_write);
     }
 
     fclose(f1);

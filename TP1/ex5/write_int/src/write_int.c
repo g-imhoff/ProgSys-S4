@@ -1,27 +1,49 @@
 #include "base.h"
-#include "error_chk.h"
 #include "write_int.h"
+
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
+    }
+}
+
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
 void write_int(const char* filename, int pos, int64_t value) {
     char zero = '0';
 
     int file = open(filename, O_RDWR | O_CREAT, 0666);
-    error_chk(file);
+    raler("Erreur lors de l'ouverture du fichier1", file);
 
-    int error = lseek(file, pos, SEEK_SET);
-    error_chk(error);
+    off_t error_lseek = lseek(file, pos, SEEK_SET);
+    raler("Erreur lors du positionnement du pointeur", (int)error_lseek);
+
     char c;
-    if (read(file, &c, 1) == 0) {
-        int test = lseek(file, 0, SEEK_END);
-        error_chk(test);
-        int i = test;
+
+    ssize_t nbr_bytes_read, nbr_bytes_write;
+    if ((nbr_bytes_read = read(file, &c, 1)) == 0) {
+        raler("Erreur lors de la lecture du fichier", (int)nbr_bytes_read);
+
+        ssize_t test = lseek(file, 0, SEEK_END);
+        raler("Erreur lors du lseek test", (int)test);
+
+        int i = (int)test;
         while (i != pos - 1) {
-            write(file, &zero, 1);
+            nbr_bytes_write = write(file, &zero, 1);
+            raler("Erreur lors de l'écriture", nbr_bytes_write);
+
             i++;
         }
     }
 
-    int write_error = write(file, &value, sizeof(int64_t));
-    error_chk(write_error);
+    nbr_bytes_write = write(file, &value, sizeof(int64_t));
+    raler("Erreur lors de l'écriture", nbr_bytes_write);
+
     close(file);
 }
