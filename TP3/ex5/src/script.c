@@ -1,42 +1,97 @@
 #include "../header/base.h"
-#include "../header/error_chk.h"
 #include "../header/script.h"
 
-void ps1(void) {
-    int tube[2]; 
-    error_chk(pipe(tube));
-
-    pid_t status_fork = fork();
-    error_chk(status_fork);
-
-    if (status_fork == 0) {
-        close(tube[0]);
-        int status_dup2 = dup2(tube[1], fileno(stdout));
-        error_chk(status_dup2);
-        close(tube[1]);
-
-        int status_execlp = execlp("ps", "ps", "eaux", NULL); 
-        error_chk(status_execlp);
-    } else {
-        close(tube[1]);
-
-        char buffer[BUFFER_SIZE];
-        ssize_t bytes_read;
-
-        int write_file = open("./toto.txt", O_CREAT | O_WRONLY, 0644);
-        error_chk(write_file);
-
-        while ((bytes_read = read(tube[0], buffer, BUFFER_SIZE)) > 0) {
-            write(write_file, buffer, bytes_read);
-        }
-
-        int wait_status = waitpid(status_fork, NULL, 0);
-        error_chk(wait_status);
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
     }
 }
 
-void script(const char* username) {
-    printf("Hello, %s\n", username);
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
+void ps1(void) {
+    int tube[2];
+    raler("Erreur lors de la création du pipe", pipe(tube));
+
+    pid_t child_pid = fork();
+    raler("Erreur lors du fork", child_pid);
+
+    if (child_pid == 0) {
+        int closing_tube0 = close(tube[0]);
+        raler("Erreur lors de la fermeture du tube en lecture", closing_tube0);
+
+        int duplication_tube1 = dup2(tube[1], STDOUT_FILENO);
+        raler("Erreur lors de la duplication du tube1", duplication_tube1);
+        int closing_tube1 = close(tube[1]);
+        raler("Erreur lors de la fermeture du tube1", closing_tube1);
+
+        execlp("ps", "ps", "eaux", NULL);
+    } else {
+        int closing_tube1 = close(tube[1]);
+        raler("Erreur lors de la fermeture du tube en ecriture", closing_tube1);
+
+        int fd_toto = open("./toto.txt", O_WRONLY | O_CREAT, 0666);
+        raler("Erreur lors de l'ouverture de toto", fd_toto);
+
+        char buffer;
+        ssize_t reading_size, writing_size; 
+        while ((reading_size = read(tube[0], &buffer, sizeof(char))) == 1) {
+            raler("Erreur lors de la lecture du tube[0]", reading_size); 
+            writing_size = write(fd_toto, &buffer, sizeof(char));
+            raler("Erreur lors de l'écriture dans toto", writing_size);
+        }
+    }
+}
+
+char* reading_toto(const char* filepath) {
+    char* file = (char*) malloc(sizeof(char));
+    raler_null("Erreur lors du malloc file", (void*) file); 
+    char buffer;
+    int size_file = 1; 
+
+    int fd = open(filepath, O_RDONLY, 0666);
+    raler("Erreur lors de l'ouverture du fichier", fd);
+
+    ssize_t reading_size;
+
+    while((reading_size = read(fd, &buffer, sizeof(char))) == 1) {
+        raler("Erreur de lecture", reading_size);
+        file[size_file - 1] = buffer;
+        size_file++;
+        file = realloc(file, (size_t) size_file);
+        raler_null("Erreur lors du realloc", file);
+    }
+
+    return file;
+}
+
+
+void grep1(const char* username) {
+    printf("Hello, %s\n", username);
+    pid_t child_pid = fork();
+    raler("Erreur lors du fork", child_pid);
+    
+    if (child_pid == 0) {
+        char* toto = reading_toto("./toto.txt");
+        write(STDIN_FILENO, toto, strlen(toto));
+
+        execlp("grep", "grep", username, NULL);
+    }
+
+    // Attendre la fin du processus enfant
+    int status;
+    waitpid(child_pid, &status, 0);
+}
+
+
+
+void script(const char* username) {
     ps1();
+    grep1(username);
 }

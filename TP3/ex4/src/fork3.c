@@ -1,25 +1,38 @@
 #include "../header/base.h"
 #include "../header/fork3.h"
-#include "../header/error_chk.h"
+
+void raler(const char* msg, int status) {
+    if (status < 0) {
+        perror(msg);
+        exit(status);
+    }
+}
+
+void raler_null(const char* msg, void* x) {
+    if (x == NULL) {
+        perror(msg);
+        exit(-1);
+    }
+}
 
 void fork3(const char* filepath) {
     pid_t pid = fork();
-    error_chk(pid);
+    raler("Erreur lors du fork", pid);
 
     int file = open(filepath, O_RDONLY);
-    error_chk(file);
+    raler("Erreur lors de l'ouverture du fichier", file);
 
     char buffer;
 
     ssize_t readsize = read(file, &buffer, 1);
-    error_chk(readsize);
+    raler("Erreur lors de la lecture du fichier", (int) readsize);
 
     int nbr_char_lu = (int)readsize;
     while (readsize > 0) {
         ssize_t sortie_standard_write = write(STDOUT_FILENO, &buffer, 1);
-        error_chk((int)sortie_standard_write);
+        raler("Erreur lors de l'écriture dans la sortie standard", (int) sortie_standard_write);
         readsize = read(file, &buffer, 1);
-        error_chk(readsize);
+        raler("Erreur lors de la lecture du fichier", (int) readsize);
         nbr_char_lu++;
     }
 
