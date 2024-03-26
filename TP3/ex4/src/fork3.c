@@ -25,14 +25,15 @@ void fork3(const char* filepath) {
     char buffer;
 
     ssize_t readsize = read(file, &buffer, 1);
-    raler("Erreur lors de la lecture du fichier", (int) readsize);
+    raler("Erreur lors de la lecture du fichier", (int)readsize);
 
     int nbr_char_lu = (int)readsize;
     while (readsize > 0) {
         ssize_t sortie_standard_write = write(STDOUT_FILENO, &buffer, 1);
-        raler("Erreur lors de l'écriture dans la sortie standard", (int) sortie_standard_write);
+        raler("Erreur lors de l'écriture dans la sortie standard",
+              (int)sortie_standard_write);
         readsize = read(file, &buffer, 1);
-        raler("Erreur lors de la lecture du fichier", (int) readsize);
+        raler("Erreur lors de la lecture du fichier", (int)readsize);
         nbr_char_lu++;
     }
 

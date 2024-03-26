@@ -75,7 +75,7 @@ void grep1(const char* username) {
     int tube[2];
     int creating_pipe = pipe(tube);
     raler("Erreur lors de la creation du pipe", creating_pipe);
-    
+
     pid_t child_pid = fork();
     raler("Erreur lors du fork", (int)child_pid);
 
@@ -98,7 +98,8 @@ void grep1(const char* username) {
         raler("Erreur lors de la fermeture du tube0 parent", closing_tube0);
 
         int duplication_tube1 = dup2(tube[1], STDOUT_FILENO);
-        raler("Erreur lors de la duplication du tube1  parent", duplication_tube1);
+        raler("Erreur lors de la duplication du tube1  parent",
+              duplication_tube1);
 
         char* toto = reading_toto("./toto.txt");
         write(tube[1], toto, strlen(toto));
@@ -107,7 +108,8 @@ void grep1(const char* username) {
         raler("Erreur lors de la fermeture du tube1 parent", closing_tube1);
 
         int status;
-        waitpid(child_pid, &status, -1); // Attendre que le processus enfant se termine
+        waitpid(child_pid, &status,
+                -1);  // Attendre que le processus enfant se termine
         if (WEXITSTATUS(status) == 0) {
             printf("%s est connecté", username);
         }
