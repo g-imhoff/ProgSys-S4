@@ -6,6 +6,7 @@ all:
 	$(MAKE) -C ex1/pipe_c
 	$(MAKE) -C ex2/pipe_red1a
 	$(MAKE) -C ex2/pipe_red1b
+	$(MAKE) -C ex2/pipe_red1c
 	
 clean:
 	$(MAKE) -C ex1/pipe_a clean
@@ -13,6 +14,7 @@ clean:
 	$(MAKE) -C ex1/pipe_c clean
 	$(MAKE) -C ex2/pipe_red1a clean 
 	$(MAKE) -C ex2/pipe_red1b clean
+	$(MAKE) -C ex2/pipe_red1c clean
 
 format : 
 	$(MAKE) -C ex1/pipe_a format
@@ -20,4 +22,5 @@ format :
 	$(MAKE) -C ex1/pipe_c format
 	$(MAKE) -C ex2/pipe_red1a format
 	$(MAKE) -C ex2/pipe_red1b format 
+	$(MAKE) -C ex2/pipe_red1c format 
 
