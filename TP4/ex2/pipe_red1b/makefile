@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pedantic
-EXEC = pipe_red1a
+EXEC = pipe_red1b
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:src/%.c=obj/%.o)
 DEPS = $(wildcard header/*.h)

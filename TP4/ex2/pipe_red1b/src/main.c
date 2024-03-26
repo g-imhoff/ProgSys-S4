@@ -1,8 +1,8 @@
 #include "../header/base.h"
-#include "../header/pipe_reda1.h"
+#include "../header/pipe_red1b.h"
 
 int main() {
-    pipe_reda1();
+    pipe_red1b();
 
     return EXIT_SUCCESS;
 }

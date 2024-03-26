@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "unistd.h": "c",
+        "base.h": "c",
+        "pipe_red1b.h": "c"
+    }
+}
