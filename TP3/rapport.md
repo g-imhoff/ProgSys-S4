@@ -22,3 +22,9 @@ capabilities(7).
 ## Exercice 4 
 1. 1. Non il n'est pas bien former, le texte n'est plus du tout lisible, on peux imaginer que le deux processus sont rentrer en conflit et écrivais en même temps ce qui a fait que le texte n'avais plus aucun sens 2. il contient le double de charactère lus par un processus, ce qui peux être explique du au fait qu'on lit deux fois le fichier avec les deux processus
 2. un des deux processus de lis pas le fichier, on peux supposer que c'est le processus enfant 
+
+## Exercice 5
+1. il faut en créer 3, un pour chaque commande (ps, grep et echo)
+2. On peut utiliser des pipe et l'utilisation de read, write et open pour le fichier toto 
+3. Sachant que command1 ; command2 veux dire que la command 2 est lancer des que la command 1 est fini, nous pouvons faire 2 fork, et avant de lancer le deuxieme fork, il faut que le premier soit fini, en utilisant la command wait ou waitpid
+4. Sachant que command1 && command2 veux dire que la command 2 est lancer uniquement si la command1 c'est bien fini, nous pouvons faire comme avant en ajoutant une condition sur le status renvoyer par le waitpid du premier fork
