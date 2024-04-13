@@ -36,12 +36,15 @@ Lancez votre programme avec `&` pour le mettre en arrière plan, puis utilisez l
 1. Quelle est la différence entre écoute active et écoute passive ?
 2. Quelle solution est à proscrire et pourquoi ?
 
-## Exercice 2 : attente active / passive
+## Exercice 2 : section critique
 
-Reprendre le programme `ecoute_passive.c`, mais modifez le de manière à ne pas faire l'affichage dans la fonction traitante (handler).
+Modifiez le programme `ecoute_passive.c` et appelez-le `ecoute_passive2.c`.  
+Modifiez-le de manière à ne pas faire l'affichage dans la fonction traitante (handler).
+De plus, le programme terminera après avoir reçu le signal `SIGINT` et affichera le message "J'ai reçu le signal SIGINT".
 Vous vous appuierez sur les bonnes pratiques vues en cours :
-- utilisation d'une variable globale de type `volatile sigatomic_t` 
+- utilisation de variables globales de type `volatile sigatomic_t` pour gérer la réception des signaux
 - blocage des signaux dans le `main` avec `sigprocmask` avant l'appel à `sigsuspend` (mise en place d'une section critique)
+- mise en place d'un masque pour masquer les signaux autres que `SIGUSR1`  et `SIGINT` dans `sigsuspend`.
 
 
 **Questions :**
@@ -49,23 +52,26 @@ Vous vous appuierez sur les bonnes pratiques vues en cours :
 2. Pourquoi doit-on bloquer les signaux dans le `main` avant l'appel à `sigsuspend` ?
 3. Qu'appelle-t-on *section critique* ? 
 4. Quelle partie du `main` est en section critique ?
+5. Quel est l'intérêt de masquer les signaux autres que `SIGUSR1` et `SIGINT` dans `sigsuspend` ?
+6. Que se passe-t-il si le programme reçoit un signal masqué par le masque de `sigsuspend` (par exemple `SIGUSR1`) ?
 
 
-## Exercice 3 : liste des signaux
 
-Écrivez un programme qui attend l’arrivée d’un signal (n’importe lequel), affiche sa signification (par exemple : `illegal instruction` pour `SIGILL`)  puis se termine.
+## Exercice 3 : compteur
+
+Écrivez le programme `compteur.c` qui incrémente et affiche un compteur à chaque fois qu’il reçoit le signal `SIGINT`. Au bout de 5 fois, il doit s’arrêter. L’incrémentation et l’affichage du compteur ne doivent pas être réalisés dans la fonction traitante (handler) (vous utiliserez une variable globale de type `volatile sigatomic_t`, comme vu en cours, et vous mettrez en place une section critique).
+Vous prendrez garde de masquer le signal `SIGINT` dans le `main` pendant la section critique.
+
+## Exercice 4 : liste des signaux
+
+Écrivez un programme qui attend l’arrivée d’un signal (entre 1 et 31), affiche sa signification (par exemple : `illegal instruction` pour `SIGILL`)  puis se termine.
 Vous pouvez utiliser la fonction de bibliothèque `psignal` pour afficher la signification d’un signal.
+L'affichage ne se fera pas dans la fonction traitante.
 Vous testerez votre programme avec la commande `kill`.
 
 **Question :**
 
 1. Quels sont les signaux dont il est impossible de modifier l'action par défaut et pourquoi ?
-
-
-## Exercice 4 : compteur
-
-Écrivez le programme `compteur.c` qui incrémente et affiche un compteur à chaque fois qu’il reçoit le signal `SIGINT`. Au bout de 5 fois, il doit s’arrêter. L’incrémentation et l’affichage du compteur ne doivent pas être réalisés dans la fonction traitante (handler) (vous utiliserez une variable globale de type `volatile sigatomic_t`, comme vu en cours).
-Vous prendrez garde de masquer le signal `SIGINT` dans le `main` pendant la section critique.
 
 
 ## Exercice 5 : masquage de signaux
