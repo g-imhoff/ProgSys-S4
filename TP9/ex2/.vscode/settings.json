@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "unistd.h": "c",
-        "base.h": "c"
+        "base.h": "c",
+        "ecoute_passive2.h": "c",
+        "raler.h": "c"
     }
 }
