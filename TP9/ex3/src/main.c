@@ -9,6 +9,7 @@ void gestionnaire_signal() {
 
 int main() {
     struct sigaction sa;
+    int compteur = 0;
 
     sa.sa_handler = gestionnaire_signal;
     sigemptyset(&sa.sa_mask);
@@ -16,18 +17,22 @@ int main() {
     sigaction(SIGINT, &sa, NULL);
 
     sigset_t mask, oldmask, empty;
-    sigfillset(&mask);
-    sigdelset(&mask, SIGUSR1);
-    sigdelset(&mask, SIGINT);
+    sigemptyset(&mask);
+    sigaddset(&mask, SIGINT);
 
     sigprocmask(SIG_BLOCK, &mask, &oldmask);  // début de la section critique
 
-    if (!signal_recu) {
-        sigemptyset(&empty);
-        sigsuspend(&empty);
-    }
+    while (compteur != 5) {
+        if (!signal_recu) {
+            sigemptyset(&empty);
+            sigsuspend(&empty);
 
-    write(STDOUT_FILENO, "Signal recu\n", 12);
+            compteur++;
+            printf("\nLe compteur est à : %d\n", compteur);
+        }
+
+        signal_recu = 0;
+    }
 
     sigprocmask(SIG_SETMASK, &oldmask, NULL);  // fin de la section critique
 
