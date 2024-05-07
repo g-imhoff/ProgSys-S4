@@ -12,29 +12,29 @@ int main() {
     int compteur = 0;
 
     sa.sa_handler = gestionnaire_signal;
-    sigemptyset(&sa.sa_mask);
+    CHK(sigemptyset(&sa.sa_mask));
     sa.sa_flags = 0;
-    sigaction(SIGINT, &sa, NULL);
+    CHK(sigaction(SIGINT, &sa, NULL));
 
     sigset_t mask, oldmask, empty;
-    sigemptyset(&mask);
-    sigaddset(&mask, SIGINT);
+    CHK(sigemptyset(&mask));
+    CHK(sigaddset(&mask, SIGINT));
 
-    sigprocmask(SIG_BLOCK, &mask, &oldmask);  // début de la section critique
+    CHK(sigprocmask(SIG_BLOCK, &mask, &oldmask));  // début de la section critique
 
     while (compteur != 5) {
         if (!signal_recu) {
-            sigemptyset(&empty);
+            CHK(sigemptyset(&empty));
             sigsuspend(&empty);
 
             compteur++;
-            printf("\nLe compteur est à : %d\n", compteur);
+            CHK(printf("\nLe compteur est à : %d\n", compteur));
         }
 
         signal_recu = 0;
     }
 
-    sigprocmask(SIG_SETMASK, &oldmask, NULL);  // fin de la section critique
+    CHK(sigprocmask(SIG_SETMASK, &oldmask, NULL));  // fin de la section critique
 
     return EXIT_SUCCESS;
 }

@@ -11,25 +11,26 @@ int main() {
     struct sigaction sa;
 
     sa.sa_handler = gestionnaire_signal;
-    sigemptyset(&sa.sa_mask);
+    CHK(sigemptyset(&sa.sa_mask));
     sa.sa_flags = 0;
-    sigaction(SIGINT, &sa, NULL);
+    CHK(sigaction(SIGINT, &sa, NULL));
 
     sigset_t mask, oldmask, empty;
-    sigfillset(&mask);
-    sigdelset(&mask, SIGUSR1);
-    sigdelset(&mask, SIGINT);
+    CHK(sigfillset(&mask));
+    CHK(sigdelset(&mask, SIGUSR1));
+    CHK(sigdelset(&mask, SIGINT));
 
-    sigprocmask(SIG_BLOCK, &mask, &oldmask);  // début de la section critique
+    CHK(sigprocmask(SIG_BLOCK, &mask, &oldmask));  // début de la section critique
 
     if (!signal_recu) {
-        sigemptyset(&empty);
+        CHK(sigemptyset(&empty));
+        
         sigsuspend(&empty);
     }
 
-    write(STDOUT_FILENO, "Signal recu\n", 12);
+    CHK(write(STDOUT_FILENO, "Signal recu\n", 12));
 
-    sigprocmask(SIG_SETMASK, &oldmask, NULL);  // fin de la section critique
+    CHK(sigprocmask(SIG_SETMASK, &oldmask, NULL));  // fin de la section critique
 
     return EXIT_SUCCESS;
 }
