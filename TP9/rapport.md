@@ -10,3 +10,6 @@
 4. Elle commence a la ligne 23 et fini au 32
 5. Pour éviter que tout les autres signal perturbe le programme
 6. Le signal ne sera pas pris en compte, par exemple si on met SIGINT dans le masque, lorsqu'on envoie le signal il n'est pas prit en compte.
+
+## Exercice 4 
+1. On ne peux pas modifier l'action de SIGKILL et SIGSTOP, en realiter on peux les modifier, mais cela est réserver au noyau, cela peux etre expliquer du au fait que ce sont des commande particulière et particulièrement puissante, utiliser dans certains cas lorsque c'est nécéssaire, ou aussi car cela pourrais créer des processus immortel.
