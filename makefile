@@ -8,6 +8,7 @@ all:
 	$(MAKE) -C TP4
 	$(MAKE) -C TP7/tpnote
 	$(MAKE) -C TP9
+	$(MAKE) -C TP10
 
 clean:
 	$(MAKE) -C TP1 clean 
@@ -17,6 +18,7 @@ clean:
 	$(MAKE) -C TP4 clean
 	$(MAKE) -C TP7/tpnote clean 
 	$(MAKE) -C TP9 clean
+	$(MAKE) -C TP10 clean
 	
 format : 
 	$(MAKE) -C TP1 format
@@ -24,3 +26,4 @@ format :
 	$(MAKE) -C TP3 format 
 	$(MAKE) -C TP4 format 
 	$(MAKE) -C TP9 format
+	$(MAKE) -C TP10 format
