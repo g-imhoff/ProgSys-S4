@@ -13,3 +13,10 @@
 
 ## Exercice 4 
 1. On ne peux pas modifier l'action de SIGKILL et SIGSTOP, en realiter on peux les modifier, mais cela est réserver au noyau, cela peux etre expliquer du au fait que ce sont des commande particulière et particulièrement puissante, utiliser dans certains cas lorsque c'est nécéssaire, ou aussi car cela pourrais créer des processus immortel.
+
+## Exercice 5
+1. Le sleep est interrompu et on passe a l'étape masquage-démasquage et au deuxieme sleep.
+2. Le sleep est interrompu et le programme est fini.
+3. Il ne se passe rien, la fonction effectue le demasquage, dort pendant 3sec et ce fini (cela ce vérifie par le biais de printf)
+4. Il ne se passe rien non plus, la fonction effectue le demasquage, dort pendant 3sec et ce fini (cela ce vérifie par le biais de printf)
+5.
