@@ -20,7 +20,8 @@ void masque() {
     CHK(sigemptyset(&mask));
     CHK(sigaddset(&mask, SIGINT));
 
-    CHK(sigprocmask(SIG_BLOCK, &mask, &oldmask));  // début de la section critique
+    CHK(sigprocmask(SIG_BLOCK, &mask,
+                    &oldmask));  // début de la section critique
 
     if (!signal_recu) {
         CHK(sigemptyset(&empty));
@@ -28,19 +29,23 @@ void masque() {
     }
 
     printf("J'ai recu le signal SIGINT\n");
-    
-    CHK(sigprocmask(SIG_SETMASK, &oldmask, NULL));  // fin de la section critique
 
-    while (sleep(3) != 0);
+    CHK(sigprocmask(SIG_SETMASK, &oldmask,
+                    NULL));  // fin de la section critique
+
+    while (sleep(3) != 0)
+        ;
 
     sigset_t secondMask, oldSecondMask;
     CHK(sigemptyset(&secondMask));
     CHK(sigaddset(&secondMask, SIGINT));
     CHK(sigprocmask(SIG_BLOCK, &secondMask, &oldSecondMask));
 
-    while (sleep(3) != 0);
+    while (sleep(3) != 0)
+        ;
 
     CHK(sigprocmask(SIG_SETMASK, &oldSecondMask, NULL));
 
-    while (sleep(3) != 0);
+    while (sleep(3) != 0)
+        ;
 }

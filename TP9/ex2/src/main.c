@@ -20,17 +20,19 @@ int main() {
     CHK(sigdelset(&mask, SIGUSR1));
     CHK(sigdelset(&mask, SIGINT));
 
-    CHK(sigprocmask(SIG_BLOCK, &mask, &oldmask));  // début de la section critique
+    CHK(sigprocmask(SIG_BLOCK, &mask,
+                    &oldmask));  // début de la section critique
 
     if (!signal_recu) {
         CHK(sigemptyset(&empty));
-        
+
         sigsuspend(&empty);
     }
 
     CHK(write(STDOUT_FILENO, "Signal recu\n", 12));
 
-    CHK(sigprocmask(SIG_SETMASK, &oldmask, NULL));  // fin de la section critique
+    CHK(sigprocmask(SIG_SETMASK, &oldmask,
+                    NULL));  // fin de la section critique
 
     return EXIT_SUCCESS;
 }

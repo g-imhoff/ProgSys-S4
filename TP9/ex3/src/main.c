@@ -20,7 +20,8 @@ int main() {
     CHK(sigemptyset(&mask));
     CHK(sigaddset(&mask, SIGINT));
 
-    CHK(sigprocmask(SIG_BLOCK, &mask, &oldmask));  // début de la section critique
+    CHK(sigprocmask(SIG_BLOCK, &mask,
+                    &oldmask));  // début de la section critique
 
     while (compteur != 5) {
         if (!signal_recu) {
@@ -34,7 +35,8 @@ int main() {
         signal_recu = 0;
     }
 
-    CHK(sigprocmask(SIG_SETMASK, &oldmask, NULL));  // fin de la section critique
+    CHK(sigprocmask(SIG_SETMASK, &oldmask,
+                    NULL));  // fin de la section critique
 
     return EXIT_SUCCESS;
 }
